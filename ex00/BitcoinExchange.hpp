@@ -9,6 +9,7 @@
 # include <map>
 
 # define stringVector std::vector<std::string>
+# define INT_MAX 2147483647
 
 class BitcoinExchange
 {

@@ -57,6 +57,12 @@ void BitcoinExchange::getRateFromDB(std::string date, float count)
     bool found = false;
     std::string line;
 
+    if (count == -777)
+    {
+        this->results.push_back("Error: too large a number");
+        return;
+    }
+
     while (std::getline(file, line)) 
     {
         if (line.find(date) != std::string::npos) 
@@ -66,6 +72,7 @@ void BitcoinExchange::getRateFromDB(std::string date, float count)
             float fin = count * rate;
             this->results.push_back(date + " => " + to_string(count) + " = " + to_string(fin));
             found = true;
+            break;
         }
     }
 
@@ -97,18 +104,34 @@ stringVector BitcoinExchange::getFile(std::string fileName)
 
 float BitcoinExchange::TryParseCount(std::string cell)
 {
+    
     float count = 0;
-    try
+    if (cell.find('.') != std::string::npos)
     {
-        count = std::atof(cell.c_str());
+        try
+        {
+            count = std::atof(cell.c_str());
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
     }
-    catch(const std::invalid_argument& e)
+    else
     {
-        //throw BitcoinExchange::NumberOfCountInvalidData();
-    }
-    catch(const std::out_of_range& e)
-    {
-        //throw BitcoinExchange::NumberOfCountTooLarge();
+        try
+        {
+            long tmp = std::atol(cell.c_str());
+            if (tmp > INT_MAX)
+                count = -777;
+            else
+                count = tmp;
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+        
     }
     return count;
 }
