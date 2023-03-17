@@ -1,6 +1,7 @@
 #include <string>
 #include <stack>
 #include <stdexcept>
+#include <stdlib.h>
 
 class RPN
 {

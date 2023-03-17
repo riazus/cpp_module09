@@ -40,8 +40,15 @@ int RPN::execute()
                     break;
             }
         }
+        else if (expression[i] == ' ')
+            continue;
         else
-            throw RPNException("Invalid Character Exception => " + expression[i]);
+        {
+            std::string str = "Invalid Character Exception => \'";
+            str += expression[i];
+            str += '\'';
+            throw RPNException(str.c_str());
+        }
     }
 
     if (operands.size() != 1)
