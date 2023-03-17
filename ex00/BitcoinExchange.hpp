@@ -37,21 +37,18 @@ class BitcoinExchange
         class FileOpenException : public std::exception
         {
             public:
-
                 virtual const char* what() const throw();
         };
 
         class FileLengthException : public std::exception
         {
             public:
-
                 virtual const char* what() const throw();
         };
 
         class FileSizeException : public std::exception
         {
             public:
-
                 virtual const char* what() const throw();
         };
 
