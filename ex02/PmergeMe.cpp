@@ -5,7 +5,6 @@ PmergeMe::PmergeMe(int ac, char **av){
     std::deque<int> inputDeque;
     std::list<int> inputList;
 
-    // fill the containers with random integers
     srand(time(NULL));
     for (int i = 1; i < ac; ++i)
     {
