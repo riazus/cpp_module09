@@ -27,7 +27,6 @@ class BitcoinExchange
         stringVector results;
 
         void ParseFromDB();
-        float getRate(std::string date);
         void getRateFromDB(std::string date, float count);
 
 
